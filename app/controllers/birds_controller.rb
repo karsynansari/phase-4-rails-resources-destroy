@@ -6,6 +6,16 @@ class BirdsController < ApplicationController
     render json: birds
   end
 
+  def destroy
+bird = Bird.find_by(id: params[:id])
+if bird
+  bird.destroy
+ render json: {message:"delete successful"}
+else 
+  render json: {error: "Bird not found"}, status: :not_found
+end
+  end
+
   # POST /birds
   def create
     bird = Bird.create(bird_params)
